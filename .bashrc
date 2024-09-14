@@ -131,6 +131,11 @@ alias l='ls -CF'
 alias v='nvim'
 alias dp='devpod'
 
+# Kubectl autocompletion
+source <(kubectl completion bash)
+# make sure it also works with k
+complete -o default -F __start_kubectl k
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

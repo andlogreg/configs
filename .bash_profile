@@ -20,3 +20,5 @@ export XDG_CONFIG_HOME="$HOME"/.config
 
 # # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+# Bash completion v2. See https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#enable-shell-autocompletion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
