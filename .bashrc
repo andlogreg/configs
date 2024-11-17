@@ -122,8 +122,10 @@ kctx() {
     fi
 }
 
-# some more ls aliases
+# some more aliases
 alias kgc='kubectl config get-contexts'
+alias kgns='kubectl get ns'
+alias kgp='kubectl get pods'
 alias k='kubectl'
 alias ll='ls -alF'
 alias la='ls -A'

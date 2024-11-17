@@ -76,9 +76,19 @@ check-further-callbacks = true
 run = ['layout floating']
 
 [[on-window-detected]]
+if.app-id = 'com.apple.AppStore'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.electron.dockerdesktop'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'com.google.Chrome'
 check-further-callbacks = true
-run = ['move-node-to-workspace B']
+run = ['move-node-to-workspace W']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
@@ -207,7 +217,7 @@ ctrl-7 = 'workspace 7'
 ctrl-8 = 'workspace 8'
 ctrl-9 = 'workspace 9'
 ctrl-0 = 'workspace A' # In your config, you can drop workspace bindings that you don't need
-ctrl-b = 'workspace B'
+#ctrl-b = 'workspace B'
 #ctrl-c = 'workspace C'
 #ctrl-d = 'workspace D'
 #ctrl-e = 'workspace E'
@@ -224,7 +234,7 @@ ctrl-s = 'workspace S'
 ctrl-t = 'workspace T'
 #ctrl-u = 'workspace U'
 #ctrl-v = 'workspace V'
-#ctrl-w = 'workspace W'
+ctrl-w = 'workspace W'
 #ctrl-x = 'workspace X'
 #ctrl-y = 'workspace Y'
 #ctrl-z = 'workspace Z'
@@ -240,7 +250,7 @@ ctrl-shift-7 = 'move-node-to-workspace 7'
 ctrl-shift-8 = 'move-node-to-workspace 8'
 ctrl-shift-9 = 'move-node-to-workspace 9'
 ctrl-shift-0 = 'move-node-to-workspace A'
-ctrl-shift-b = 'move-node-to-workspace B'
+# ctrl-shift-b = 'move-node-to-workspace B'
 #ctrl-shift-c = 'move-node-to-workspace C'
 #ctrl-shift-d = 'move-node-to-workspace D'
 #ctrl-shift-e = 'move-node-to-workspace E'
@@ -257,7 +267,7 @@ ctrl-shift-s = 'move-node-to-workspace S'
 ctrl-shift-t = 'move-node-to-workspace T'
 #ctrl-shift-u = 'move-node-to-workspace U'
 #ctrl-shift-v = 'move-node-to-workspace V'
-#ctrl-shift-w = 'move-node-to-workspace W'
+ctrl-shift-w = 'move-node-to-workspace W'
 #ctrl-shift-x = 'move-node-to-workspace X'
 #ctrl-shift-y = 'move-node-to-workspace Y'
 #alt-shift-z = 'move-node-to-workspace Z'
