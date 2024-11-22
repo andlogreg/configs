@@ -8,16 +8,22 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+set -o vi
+
+
+### ENV VARS ###
+export REPOS=$HOME/dev/repos
+
+### HISTORY ####
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=10000
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -89,46 +95,38 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Helper functions
-kns() {
-    if kubectl get namespace "$1" >/dev/null 2>&1; then
-        kubectl config set-context --current --namespace="$1"
-        if [ $? -eq 0 ]; then
-            echo "Namespace changed to '$1'."
-        else
-            echo "Failed to change namespace."
-        fi
-    else
-        echo "Namespace '$1' does not exist."
-        return 1
-    fi
-}
-kctx() {
-    if [ -z "$1" ]; then
-        echo "Please provide a context."
-        return 1
-    fi
 
-    # Check if the context exists
-    if kubectl config get-contexts "$1" >/dev/null 2>&1; then
-        kubectl config use-context "$1"
-        if [ $? -eq 0 ]; then
-            echo "Context changed to '$1'."
-        else
-            echo "Failed to change context."
-        fi
-    else
-        echo "Context '$1' does not exist."
-        return 1
-    fi
-}
+clone() {
+  local repo="$1" user
+  local repo="${repo#https://github.com/}"
+  local repo="${repo#git@github.com:}"
+  if [[ $repo =~ / ]]; then
+    user="${repo%%/*}"
+  else
+    user="$GITUSER"
+    [[ -z "$user" ]] && user="$USER"
+  fi
+  local name="${repo##*/}"
+  local userd="$REPOS/github.com/$user"
+  local path="$userd/$name"
+  [[ -d "$path" ]] && cd "$path" && return
+  mkdir -p "$userd"
+  cd "$userd"
+#   echo gh repo clone "$user/$name" -- --recurse-submodule
+#   gh repo clone "$user/$name" -- --recurse-submodule
+  echo git clone "git@github.com:$user/$name.git/"
+  git clone "git@github.com:$user/$name.git/"
+  cd "$name"
+} && export -f clone
 
 # some more aliases
-alias kgc='kubectl config get-contexts'
-alias kgns='kubectl get ns'
-alias kgp='kubectl get pods'
+alias kc='kubectx'
+alias kn='kubens'
+alias kgpa='kubectl get pods'
+alias kgpa='kubectl get pods -A'
 alias k='kubectl'
 alias ll='ls -alF'
-alias la='ls -A'
+alias la='ls -lathr'
 alias l='ls -CF'
 alias v='nvim'
 alias dp='devpod'
@@ -164,3 +162,7 @@ fi
 
 # # Generated for envman. Do not edit.
 # [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# Prompt
+
+eval "$(starship init bash)"

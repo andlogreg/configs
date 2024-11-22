@@ -10,6 +10,8 @@
 # TODO install devpod https://devpod.sh
 # devpod provider add docker
 
+# install brew packages
+brew install starship font-ubuntu-mono-nerd-font kubectx
 
 # create directories
 # TODO this should also be in bashrc
@@ -23,6 +25,7 @@ mkdir -p "$XDG_CONFIG_HOME"/k9s
 # symlinks
 ln -sf "$PWD/alacritty/alacritty.toml" "$XDG_CONFIG_HOME"/alacritty/alacritty.toml
 ln -sf "$PWD/aerospace/aerospace.toml" "$XDG_CONFIG_HOME"/aerospace/aerospace.toml
+ln -sf "$PWD/starship/starship.toml" "$XDG_CONFIG_HOME"/starship.toml
 ln -sf "$PWD/k9s" "$XDG_CONFIG_HOME"/k9s
 ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/.bashrc" "$HOME"/.bashrc
